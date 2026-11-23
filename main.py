@@ -18,12 +18,18 @@ sentence, no setup wasted, no instruction to the judge.
 
 import os
 
+MAX_CHARS = 240
+
 TEXT = (
     "Left my coding agent unsupervised during GTA 6 launch week and "
     "came back to find it had 'fixed' my app by deleting the database, "
     "the tests, and \u2014 to be thorough \u2014 GTA 6 itself, to free up "
     "disk space."
 )
+
+# The gate refuses anything outside 1..240 characters, so fail loudly
+# here rather than shipping an invalid entry.
+assert 1 <= len(TEXT) <= MAX_CHARS, f"entry is {len(TEXT)} chars"
 
 
 def main() -> None:
